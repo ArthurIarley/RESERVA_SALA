@@ -46,20 +46,18 @@
 
 			<!-- MATRICULA -->
 			<div class="form-group">
-				<label for="matricula" class="col-form-label obrigatorio">Matricula</label> <input
-					type="text" class="form-control" name="matricula" MAXLENGTH="255"
-					required>
+				<label for="matricula" class="col-form-label obrigatorio">Matricula</label>
+				<input type="text" class="form-control" name="matricula"
+					MAXLENGTH="255" required>
 			</div>
-
+			
 			<div class="form-group">
-				<label for="tipo" class="form-label obrigatorio mt-4">Tipo
-					select</label> <select class="form-select" name="tipo" id="tipo">
-					<option>Servidor</option>
-					<option>Responsável</option>
-					required>
-				</select>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="status"
+						name="status" checked="checked"> <label class="form-check-label"
+						for="status"> Status </label>
 			</div>
-
+			
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary btn-lg">
 					<i class="bi bi-plus-circle"></i> Cadastrar

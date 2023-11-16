@@ -20,6 +20,10 @@
 						<tr>
 							<th scope="col">ID</th>
 							<th scope="col">Nome</th>
+							<th scope="col">Email</th>
+							<th scope="col">Telefone</th>
+							<th scope="col">Matricula</th>
+							<th scope="col">Status</th>
 							<th scope="col">Ações</th>
 						</tr>
 					</thead>
@@ -29,6 +33,10 @@
 							<tr>
 								<td scope="row">${servidor.id}</td>
 								<td>${servidor.nome}</td>
+								<td>${servidor.email}</td>
+								<td>${servidor.telefone}</td>
+								<td>${servidor.matricula}</td>
+								<td>${sala.status eq true ? 'Ativo' : 'Inativo'}</td>
 								<td>
 									<!-- Exibir --> <a
 									href="<c:url value="/servidor/exibe?id=${servidor.id}"/>"
@@ -59,7 +67,7 @@
 												</div>
 												<div class="modal-body">
 													<p>
-														Deseja realmente excluir o f <br>ID (${servidor.id})
+														Deseja realmente excluir o if <br>ID (${servidor.id})
 														-> ${servidor.nome}?
 													</p>
 												</div>

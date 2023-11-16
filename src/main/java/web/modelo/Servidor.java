@@ -28,9 +28,8 @@ public class Servidor {
 	@Column(unique = true)
 	private String matricula;
 
-	@NotNull
-	private String tipo;
-
+	private boolean status;
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,12 +70,14 @@ public class Servidor {
 		this.matricula = matricula;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
+	
+	
 
 }

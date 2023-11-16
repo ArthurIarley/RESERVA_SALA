@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <hr />
 <footer>
-	<p align="center">&copy; 2023 - Todos os direitos reservados a <a href="https://br.linkedin.com/in/cl%C3%A9sio-gon%C3%A7alves-24375652" target="_blank">Clésio Gonçalves</a></p>
+	<p align="center">&copy; 2023 - Todos os direitos reservados a Arthur, Stenio, Lourival, Mateus, Cecilia</p>
 </footer>
 
 

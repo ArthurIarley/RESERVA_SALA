@@ -12,68 +12,67 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import web.dao.CursoDao;
-import web.modelo.Curso;
+import web.dao.SolicitacaoDao;
+import web.modelo.Solicitacao;
 
 @Transactional
 @Controller
-@RequestMapping("/curso")
-public class CursoController {
+@RequestMapping("/solicitacao")
+public class SolicitacaoController {
 
-	private List<Curso> lista_cursos;
+	private List<Solicitacao> lista_solicitacaos;
 
 	@Autowired
-	CursoDao dao;
+	SolicitacaoDao dao;
 
 	@RequestMapping("/novo")
-	public String curso() {
-		return "curso/novo";
+	public String solicitacao() {
+		return "solicitacao/novo";
 	}
 
 	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
-	public String adiciona(@Valid Curso curso, BindingResult result) {
-		if (result.hasErrors() || dao.buscaPorNome(curso.getNome()).size() > 0) {
+	public String adiciona(@Valid Solicitacao solicitacao, BindingResult result) {
+		if (result.hasErrors() ) {
 			return "redirect:novo";
 		}
 
 		// Adiciona no banco de dados
-		dao.adiciona(curso);
+		dao.adiciona(solicitacao);
 		return "redirect:lista";
 	}
 
 	@RequestMapping("/lista")
 	public String lista(Model model) {
-		this.lista_cursos = dao.lista();
-		model.addAttribute("cursos", this.lista_cursos);
-		return "curso/lista";
+		this.lista_solicitacaos = dao.lista();
+		model.addAttribute("solicitacaos", this.lista_solicitacaos);
+		return "solicitacao/lista";
 	}
 
 	@RequestMapping("/remove")
-	public String remove(Curso curso) {
-		dao.remove(curso.getId());
+	public String remove(Solicitacao solicitacao) {
+		dao.remove(solicitacao.getId());
 		return "redirect:lista";
 	}
 
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
-		model.addAttribute("curso", dao.buscaPorId(id));
-		return "curso/exibe";
+		model.addAttribute("solicitacao", dao.buscaPorId(id));
+		return "solicitacao/exibe";
 	}
 
 	@RequestMapping("/edita")
 	public String edita(Long id, Model model) {
-		model.addAttribute("curso", dao.buscaPorId(id));
-		return "curso/edita";
+		model.addAttribute("solicitacao", dao.buscaPorId(id));
+		return "solicitacao/edita";
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.POST)
-	public String altera(@Valid Curso curso, BindingResult result) {
-		this.lista_cursos = dao.buscaPorNome(curso.getNome());
-		if (result.hasErrors() || this.lista_cursos.size() > 0) {
-			return "redirect:edita?id=" + curso.getId();
+	public String altera(@Valid Solicitacao solicitacao, BindingResult result) {
+	if (result.hasErrors() ) {
+			return "redirect:edita?id=" + solicitacao.getId();
 		}
 
-		dao.altera(curso);
+		dao.altera(solicitacao);
 		return "redirect:lista";
 	}
 

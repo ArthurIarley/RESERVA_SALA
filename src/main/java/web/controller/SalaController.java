@@ -12,69 +12,76 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import web.dao.SalaDao;
 import web.dao.ServidorDao;
-import web.modelo.Servidor;
+import web.modelo.Sala;
 
 @Transactional
 @Controller
-@RequestMapping("/servidor")
-public class ServidorController {
+@RequestMapping("/sala")
+public class SalaController {
 
-	private List<Servidor> lista_servidors;
+	private List<Sala> lista_salas;
 
 	@Autowired
-	ServidorDao dao;
+	SalaDao dao;
+	
+	@Autowired
+	ServidorDao dao_servidor;
 
 	@RequestMapping("/novo")
-	public String servidor() {
-		return "servidor/novo";
+	public String sala(Model model) {
+		model.addAttribute("servidores", dao_servidor.lista());
+		return "sala/novo";
 	}
 
 	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
-	public String adiciona(@Valid Servidor servidor, BindingResult result) {
-		if (result.hasErrors() || dao.buscaPorMatriculaAdiciona(servidor).size() > 0) {
+	public String adiciona(@Valid Sala sala, BindingResult result) {
+		if (result.hasErrors() || dao.buscaPorNomeAdiciona(sala).size() > 0) {
 			return "redirect:novo";
 		}
 
 		// Adiciona no banco de dados
-		dao.adiciona(servidor);
+		dao.adiciona(sala);
 		return "redirect:lista";
 	}
 
 	@RequestMapping("/lista")
 	public String lista(Model model) {
-		this.lista_servidors = dao.lista();
-		model.addAttribute("servidors", this.lista_servidors);
-		return "servidor/lista";
+		this.lista_salas = dao.lista();
+		model.addAttribute("salas", this.lista_salas);
+		return "sala/lista";
 	}
 
 	@RequestMapping("/remove")
-	public String remove(Servidor servidor) {
-		dao.remove(servidor.getId());
+	public String remove(Sala sala) {
+		dao.remove(sala.getId());
 		return "redirect:lista";
 	}
 
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
-		model.addAttribute("servidor", dao.buscaPorId(id));
-		return "servidor/exibe";
+		model.addAttribute("sala", dao.buscaPorId(id));
+		return "sala/exibe";
 	}
 
 	@RequestMapping("/edita")
 	public String edita(Long id, Model model) {
-		model.addAttribute("servidor", dao.buscaPorId(id));
-		return "servidor/edita";
+		model.addAttribute("sala", dao.buscaPorId(id));
+		model.addAttribute("servidores", dao_servidor.lista());
+		return "sala/edita";
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.POST)
-	public String altera(@Valid Servidor servidor, BindingResult result) {
-		this.lista_servidors = dao.buscaPorMatriculaEdita(servidor);
-		if (result.hasErrors() || (this.lista_servidors.size() > 0)) {
-			return "redirect:edita?id=" + servidor.getId();
+	public String altera(@Valid Sala sala, BindingResult result) {
+		this.lista_salas = dao.buscaPorNomeEdita(sala);
+		if (result.hasErrors() || (this.lista_salas.size() > 0)) {
+			return "redirect:edita?id=" + sala.getId();
 		}
 
-		dao.altera(servidor);
+		dao.altera(sala);
 		return "redirect:lista";
 	}
 
 }
+

@@ -27,9 +27,16 @@ public class ServidorDao {
 		return manager.createQuery("select c from Servidor c order by c.id desc", Servidor.class).getResultList();
 	}
 
-	public List<Servidor> buscaPorNome(String nome) {
-		return manager.createQuery("select c from Servidor c where c.nome = :nome", Servidor.class).setParameter("nome", nome)
+	public List<Servidor> buscaPorMatriculaEdita(Servidor servidor) {
+		return manager
+				.createQuery("select c from Servidor c where c.matricula = :matricula and c.id <> :id", Servidor.class)
+				.setParameter("matricula", servidor.getMatricula()).setParameter("id", servidor.getId())
 				.getResultList();
+	}
+
+	public List<Servidor> buscaPorMatriculaAdiciona(Servidor servidor) {
+		return manager.createQuery("select c from Servidor c where c.matricula = :matricula", Servidor.class)
+				.setParameter("matricula", servidor.getMatricula()).getResultList();
 	}
 
 	public Servidor buscaPorId(Long id) {

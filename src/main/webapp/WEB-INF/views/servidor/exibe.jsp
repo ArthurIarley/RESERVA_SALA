@@ -22,7 +22,25 @@
 						</tr>
 						<tr>
 							<th>Nome</th>
-							<td style="font-weight: bold; color: blue;">${servidor.nome}</td>
+							<td style="font-weight: bold; color: white;">${servidor.nome}</td>
+						</tr>
+						<tr>
+							<th>Email</th>
+							<td>${servidor.email}</td>
+						</tr>
+						<tr>
+							<th>Telefone</th>
+							<td>${servidor.telefone}</td>
+						</tr>
+						<tr>
+							<th>Matricula</th>
+							<td>${servidor.nome}</td>
+						</tr>
+						
+						<tr>
+					
+							<th>Status</th>
+							<td>${sala.status eq true ? 'Ativo' : 'Inativo'}</td>
 						</tr>
 					</table>
 				</div>

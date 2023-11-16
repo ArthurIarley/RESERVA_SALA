@@ -6,15 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cadastrar Curso</title>
+<title>Cadastrar Sala</title>
 
 <c:import url="../componentes/cabecalho.jsp" />
 
 <div class="p-5 mb-4 bg-light rounded-3">
 	<div class="container py-5">
-		<h1 class="display-5 fw-bold">Cadastrar Curso</h1>
+		<h1 class="display-5 fw-bold">Cadastrar Sala</h1>
 		<p class="col-md-12 fs-4">Preencha o formulário abaixo para
-			realizar o cadastro do curso no sistema.</p>
+			realizar o cadastro da sala no sistema.</p>
 	</div>
 </div>
 
@@ -31,14 +31,31 @@
 					MAXLENGTH="255" required>
 			</div>
 
+			<div class="form-group">
+				<label for="responsavel.id" class="form-label obrigatorio mt-4">Responsável</label>
+				<select class="form-select" name="responsavel.id"
+					id="responsavel.id" required>
+					<c:forEach var="servidor" items="${servidores}">
+						<option value="${servidor.id}">${servidor.matricula}-
+							${servidor.nome}</option>
+					</c:forEach>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="status"
+						name="status" checked="checked"> <label class="form-check-label"
+						for="status"> Status </label>
+				</div>
+			</div>
+
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary btn-lg">
-					<i class="bi bi-plus-circle"></i>
-					Cadastrar
+					<i class="bi bi-plus-circle"></i> Cadastrar
 				</button>
 				<button type="reset" class="btn btn-secondary btn-lg">
-					<i class="bi bi-trash"></i>
-					Limpar
+					<i class="bi bi-trash"></i> Limpar
 				</button>
 			</div>
 
