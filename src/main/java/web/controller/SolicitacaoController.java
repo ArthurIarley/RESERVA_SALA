@@ -12,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import web.dao.SalaDao;
 import web.dao.SolicitacaoDao;
+import web.modelo.Sala;
 import web.modelo.Solicitacao;
 
 @Transactional
@@ -24,9 +26,13 @@ public class SolicitacaoController {
 
 	@Autowired
 	SolicitacaoDao dao;
+	
+	@Autowired
+	SalaDao dao_sala;
 
 	@RequestMapping("/novo")
-	public String solicitacao() {
+	public String solicitacao(Model model) {
+		model.addAttribute("salas",dao_sala.lista());
 		return "solicitacao/novo";
 	}
 
